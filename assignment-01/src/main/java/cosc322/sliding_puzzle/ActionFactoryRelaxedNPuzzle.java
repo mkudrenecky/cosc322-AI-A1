@@ -19,8 +19,17 @@ public class ActionFactoryRelaxedNPuzzle extends ActionFactory<StateNPuzzle>{
 	/**
 	 * Returns an array of state.N actions  
 	 */
-	public ActionSlidingPuzzle[] getActions(StateNPuzzle state){					
-		return null;
+	public ActionSlidingPuzzle[] getActions(StateNPuzzle state){
+
+		ActionSlidingPuzzle[] actions = new ActionSlidingPuzzle[1];
+   
+		int[] blankPos = state.blankPosition();
+
+		int tileId = blankPos[1]*state.n + blankPos[0];
+
+		actions[0] = new ActionSlidingPuzzle(0, tileId, state);
+
+		return actions;
 	}
 			
 }//end of class

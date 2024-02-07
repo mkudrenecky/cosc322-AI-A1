@@ -42,8 +42,13 @@ public class StateSpaceNPuzzle extends StateSpace<StateNPuzzle>{
  
 		//For Assignment 01, you need to  complete the implementation of 
 		//this method to calculate and set the f_value of the given node
+		StateNPuzzle state = node.getState();
+		double h = this.compute_h_value(state);
+		double g = node.get_g_value();	
+		node.set_f_value(h+g);
 		
 		return node.get_f_value();
+
 	}
 	
 	public boolean goalTest(SearchTreeNode<StateNPuzzle> node) {

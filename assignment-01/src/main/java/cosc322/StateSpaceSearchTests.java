@@ -13,8 +13,8 @@ public class StateSpaceSearchTests {
 		int n = 3;
 		
 		int[][] g = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
-		//int[][] a = {{3, 6, 0}, {2, 7, 4}, {1, 8, 5}};
-		int[][] a = {{1, 2, 5}, {3, 4, 8}, {6, 7, 0}};
+		int[][] a = {{3, 6, 0}, {2, 7, 4}, {1, 8, 5}};
+		//int[][] a = {{1, 2, 5}, {3, 4, 8}, {6, 7, 0}};
 		
 		StateNPuzzle goal = new StateNPuzzle(N, g);
 		//System.out.println(goal);
@@ -27,17 +27,38 @@ public class StateSpaceSearchTests {
 		//ActionFactory for standard N-puzzle. Change to ActionFactoryRelaxedNPuzzle 
 		//that you implemented for the Gaschnig puzzle      
 		ActionFactory<StateNPuzzle> actionFac = new ActionFactoryNPuzzle();
- 
+		//ActionFactory<StateNPuzzle> actionFac = new ActionFactoryRelaxedNPuzzle();
 		sp.setActionFactory(actionFac);
-		
+				
+		//Do greedy-best-first search
 		sp.setGoalState(goal);
 		sp.setInitialState((StateNPuzzle) start);
+		StateSpaceSearchTests.greedyBestFirstSearch(sp);
 		
+
+		//Do A* search
+		sp.setGoalState(goal);
+		sp.setInitialState((StateNPuzzle) start);
+		StateSpaceSearchTests.aStarSearch(sp);
+		 
+	}
+
+	public static String greedyBestFirstSearch(StateSpaceNPuzzle sp) {
+		sp.algorithm_type = BestFirstSearch.SEARCH_METHOD_GREEDY_BEST_FIRST;
 		
 		BestFirstSearch<StateNPuzzle> bfs = new BestFirstSearch<>(sp);
 		String res = bfs.startSearchSession(true); // true to turn the tracer on
 		System.out.println(res);
-		 
+		return res;
+		
 	}
-
+	
+	public static String aStarSearch(StateSpaceNPuzzle sp) {
+		sp.algorithm_type = BestFirstSearch.SEARCH_METHOD_A_STAR;
+		
+		BestFirstSearch<StateNPuzzle> bfs = new BestFirstSearch<>(sp);
+		String res = bfs.startSearchSession(true); // true to turn the tracer on
+		System.out.println(res);
+		return res;	
+	}
 }
