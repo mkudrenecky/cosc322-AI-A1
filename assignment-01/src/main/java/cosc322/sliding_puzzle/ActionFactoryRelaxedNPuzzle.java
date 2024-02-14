@@ -3,6 +3,7 @@ package cosc322.sliding_puzzle;
 import ygraph.ai.state_space_search.ActionFactory;
 import ygraph.ai.state_space_search.sliding_puzzle.ActionSlidingPuzzle;
 import ygraph.ai.state_space_search.sliding_puzzle.StateNPuzzle;
+import java.util.Random;
  
 /**
  * ActionFactory for relaxed N-puzzles --- a tile A can be moved to Tile B as long as B is the 
@@ -21,13 +22,17 @@ public class ActionFactoryRelaxedNPuzzle extends ActionFactory<StateNPuzzle>{
 	 */
 	public ActionSlidingPuzzle[] getActions(StateNPuzzle state){
 
-		ActionSlidingPuzzle[] actions = new ActionSlidingPuzzle[1];
-   
-		int[] blankPos = state.blankPosition();
+		ActionSlidingPuzzle[] actions = new ActionSlidingPuzzle[state.N+1];
 
-		int tileId = blankPos[1]*state.n + blankPos[0];
+		// int[] blankPos = state.blankPosition();
 
-		actions[0] = new ActionSlidingPuzzle(0, tileId, state);
+		// int tileId = blankPos[0]*state.n + blankPos[1];
+		
+		// actions[0] = new ActionSlidingPuzzle(0, tileId, state);
+
+		for(int i = 1; i < state.N+1; i++){
+			actions[i] = new ActionSlidingPuzzle(0, i, state);
+		}
 
 		return actions;
 	}

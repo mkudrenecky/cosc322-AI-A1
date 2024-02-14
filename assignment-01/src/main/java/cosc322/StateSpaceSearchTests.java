@@ -13,8 +13,10 @@ public class StateSpaceSearchTests {
 		int n = 3;
 		
 		int[][] g = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
-		int[][] a = {{3, 6, 0}, {2, 7, 4}, {1, 8, 5}};
-		//int[][] a = {{1, 2, 5}, {3, 4, 8}, {6, 7, 0}};
+		// int[][] a = {{3, 6, 0}, {2, 7, 4}, {1, 8, 5}};
+		int[][] a = {{1, 2, 5}, {3, 4, 8}, {6, 7, 0}};
+		// int[][] a = {{2,1,3},{4,5,6},{7,8,0}};
+		
 		
 		StateNPuzzle goal = new StateNPuzzle(N, g);
 		//System.out.println(goal);
@@ -27,7 +29,7 @@ public class StateSpaceSearchTests {
 		//ActionFactory for standard N-puzzle. Change to ActionFactoryRelaxedNPuzzle 
 		//that you implemented for the Gaschnig puzzle      
 		ActionFactory<StateNPuzzle> actionFac = new ActionFactoryNPuzzle();
-		//ActionFactory<StateNPuzzle> actionFac = new ActionFactoryRelaxedNPuzzle();
+		// ActionFactory<StateNPuzzle> actionFac = new ActionFactoryRelaxedNPuzzle();
 		sp.setActionFactory(actionFac);
 				
 		//Do greedy-best-first search

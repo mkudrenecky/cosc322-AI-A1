@@ -43,9 +43,19 @@ public class StateSpaceNPuzzle extends StateSpace<StateNPuzzle>{
 		//For Assignment 01, you need to  complete the implementation of 
 		//this method to calculate and set the f_value of the given node
 		StateNPuzzle state = node.getState();
+
+		// need to check if A* or greedy and set appropriate f_value
+		// greedy: h
+		// A*: h+g
 		double h = this.compute_h_value(state);
 		double g = node.get_g_value();	
-		node.set_f_value(h+g);
+		//node.set_f_value(h);
+		if(this.algorithm_type == BestFirstSearch.SEARCH_METHOD_GREEDY_BEST_FIRST){
+			node.set_f_value(h);
+		}
+		else if(this.algorithm_type == BestFirstSearch.SEARCH_METHOD_A_STAR){
+			node.set_f_value(h+g);
+		}
 		
 		return node.get_f_value();
 
@@ -85,6 +95,7 @@ public class StateSpaceNPuzzle extends StateSpace<StateNPuzzle>{
 		double h = 0;		 
 		
 		h = this.misplacedTileDistance(state); 
+		// h = this.streetBlockDistance(state);
 		return h;
 	}
 
